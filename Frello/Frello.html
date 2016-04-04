@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frello</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="Frello.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="Frello.css">
+</head>
+<body ng-app="Frello">
+<div ng-controller="FrelloToDoListController as todoList">
+    <br/>
+    <h1>Frello</h1>
+    <p>The best tool for keeping up with your todo list!</p>
+    <input type="text" ng-model="todoList.todoText" />
+    <button class="btn " ng-class="addEditBtnClass" ng-click="todoList.addTodo()" >{{addButton}}</button>
+    <button class="btn" ng-click="todoList.toggleHide()" >Toggle hide</button>
+    <button class="btn btn-danger" ng-click="todoList.archive()" >Archive</button>
+    <button class="btn btn-warning" ng-click="todoList.unArchive()" >Un archive</button>
+    <div ng-hide="todoList.checkHide()">
+    <h2>Todo list</h2>
+    <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining, archived {{todoList.archivedTodos.length}}</span>
+        <h3>Current Todo</h3>
+    <ul class="unstyled">
+        <li ng-repeat="todo in todoList.todos">
+            <inp class="checkbox">
+                <input type="checkbox" ng-model="todo.done"/>
+                <span class="done-{{todo.done}}" ng-click="todoList.editTodo(todo)">{{todo.text}}</span>
+            </label>
+        </li>
+    </ul>
+        <h3>Arhchive</h3>
+        <ul class="unstyled">
+            <li ng-repeat="archivedTodo in todoList.archivedTodos">
+                <label class="checkbox">
+                <input type="checkbox" ng-model="archivedTodo.done"/>
+                <span class="done-{{archivedTodo.done}}">{{archivedTodo.text}}</span>
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
