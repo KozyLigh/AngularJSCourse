@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MLB - calculate your savings or payments</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="MLB.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="MLB.css">
+</head>
+<body>
+<div ng-app="MLB">
+<div ng-controller="MLBSavingsController as savingsCtrl">
+    <br/>
+    <h1>Calculate your savings</h1>
+    <p>Here you can calculate your savings data:</p>
+    <label>Monthly payment amount:</label>
+    <input type="number" ng-model="savingsCtrl.monthlyPayment" placeholder="Decimal" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/>
+    <label>Number of months:</label>
+    <input type="number" ng-model="savingsCtrl.numberOfMonths" placeholder="Decimal" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" required />
+    <label>Interest %:</label>
+    <input type="number" ng-model="savingsCtrl.interestPercent" placeholder="Decimal" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />
+    <button class="btn btn-primary" ng-click="savingsCtrl.addSaving(savingsCtrl.monthlyPayment, savingsCtrl.numberOfMonths, savingsCtrl.interestPercent )" >Calculate</button>
+    <br/>
+    <button class="btn btn-danger" ng-click="savingsCtrl.removeSelected()" >Remove selected</button>
+    <div>
+    <h3>Savings list</h3>
+    <ul class="unstyled">
+        <li ng-repeat="saving in savingsCtrl.savings | orderBy: -fullValue">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="saving.done"/>
+                <span class="done-{{saving.done}}">Payment of {{saving.monthlyPayment}}, for {{saving.numberOfMonths}} with interest {{saving.interestPercent}} % will save {{saving.fullValue | currency:''}}, interest gain is {{saving.interestValue | currency:''}} </span>
+            </label>
+        </li>
+    </ul>
+    </div>
+</div>
+
+    <div ng-controller="MLBPaymentsController as paymentsCtrl">
+        <br/>
+        <h1>Calculate your payments</h1>
+        <p>The best tool for calculating the amount of money needed in your account to be able to receive a monthly payment of your choice for a set period of time!</p>
+        <label>Monthly payment:</label>
+        <input type="number" ng-model="paymentsCtrl.monthlyPayment" placeholder="Decimal" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/>
+        <label>Number of months:</label>
+        <input type="number" ng-model="paymentsCtrl.numberOfMonths" placeholder="Decimal" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="1" required />
+        <button class="btn btn-primary" ng-click="paymentsCtrl.showNeededAmount(paymentsCtrl.monthlyPayment, paymentsCtrl.numberOfMonths)" >Calculate</button>
+        <br/>
+        <p>In order to have the monthly payment of <b>{{paymentAmount}}</b> for a duration of <b>{{paymentMonths}}</b> months, you will need <b>{{calculatedAmount}}</b> in your account.</p>
+    </div>
+
+</div>
+</body>
+</html>

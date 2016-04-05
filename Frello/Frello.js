@@ -10,15 +10,15 @@ angular.module('Frello', [])
         $scope.addButton = 'Add new task';
         $scope.addEditBtnClass='btn-primary';
 
-        todoList.addTodo = function() {
+        todoList.addTodo = function(todoText) {
             if(taskIndex!=-1){
-                todoList.todos[taskIndex].text=todoList.todoText;
+                todoList.todos[taskIndex].text=todoText;
                 taskIndex=-1;
                 $scope.addButton = 'Add new task';
                 $scope.addEditBtnClass='btn-primary';
 
             }else{
-                todoList.todos.push({text:todoList.todoText, done:false});
+                todoList.todos.push({text:todoText, done:false});
             }
             todoList.todoText = '';
         };
