@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Freelancer</title>
+    <script src="angular.min.js"></script>
+    <script src="angular-animate.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="Freelancer.css">
+</head>
+<body >
+<div ng-app="Freelancer">
+    <h1>Choose the type of service you need</h1>
+    <div>
+        <label>
+            <input type="radio" ng-model="formType" value="Freelancer"> Freelancer
+        </label>
+        <label>
+            <input type="radio" ng-model="formType" value="WebPage"> Web page
+        </label>
+        <label>
+            <input type="radio" ng-model="formType" value="Consultancy"> Consultancy
+        </label>
+
+    </div>
+
+    <div ng-controller="WebPageController as webPageCtrl" ng-show="formType == 'Freelancer'"  >
+        <h1>{{webPageCtrl.title}}</h1>
+        <form name="webForm" class="form-inline" novalidate>
+            <div class="form-group row">
+                <label for="webFormEmail" class="col-sm-6 form-control-label">Email</label>
+                <div class="col-sm-6">
+                    <input name="email" class="form-control " placeholder="marko.kozjak@nudge-labs.com" id="webFormEmail" type="email" ng-model="email" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="webFormPhoneNumber" class="col-sm-6 form-control-label">Phone number</label>
+                <div class="col-sm-6">
+                    <input name="phoneNumber" class="form-control" placeholder="+38631311032" id="webFormPhoneNumber" type="text" ng-model="phoneNumber" ng-pattern="/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="webFormAddress" class="col-sm-6 form-control-label">Address</label>
+                <div class="col-sm-6">
+                    <input name="address" class="form-control" id="webFormAddress" placeholder="Brnčičeva 13" type="text" ng-model="address" ng-required="false"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="webFormZipCode" class="col-sm-6 form-control-label">Zip code</label>
+                <div class="col-sm-6">
+                    <input name="zipCode" class="form-control" id="webFormZipCode" placeholder="1231" type="text" ng-model="zipCode" ng-required="false"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="webFormDemand" class="col-sm-6 form-control-label">Demand</label>
+                <div class="col-sm-6">
+                    <input name="demand" class="form-control" id="webFormDemand" placeholder="Demand" type="text" ng-model="demand" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <input type="submit" class="btn btn-primary col-sm-12" ng-disabled="webForm.$invalid" ng-click="webPageCtrl.submit(email, phoneNumber, address, zipCode, demand )" value="Send demand" />
+            </div>
+        </form>
+        <!--<p>Is form invalid: {{ webForm.$invalid }}</p>-->
+        <div ng-show="webForm.email.$dirty">
+            <p ng-show="webForm.email.$error.required">Email field is required!</p>
+            <p ng-show="webForm.email.$error.email">Email is not in the correct format!</p>
+        </div>
+        <div ng-show="webForm.phoneNumber.$dirty">
+            <p ng-show="webForm.phoneNumber.$error.required">PhoneNumber field is required!</p>
+        </div>
+        <div ng-show="webForm.demand.$dirty">
+            <p ng-show="webForm.demand.$error.required">Demand field is required!</p>
+        </div>
+    </div>
+    <div ng-controller="AngularFormController as formCtrl" ng-show="formType == 'WebPage'"  >
+        <h1>{{formCtrl.title}}</h1>
+        <form name="AngularForm" class="form-inline" novalidate>
+            <div class="form-group row">
+                <label for="formCtrlEmail" class="col-sm-6 form-control-label">Email</label>
+                <div class="col-sm-6">
+                    <input name="email" class="form-control " placeholder="marko.kozjak@nudge-labs.com" id="formCtrlEmail" type="email" ng-model="email" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlPhoneNumber" class="col-sm-6 form-control-label">Phone number</label>
+                <div class="col-sm-6">
+                    <input name="phoneNumber" class="form-control" placeholder="+38631311032" id="formCtrlPhoneNumber" type="text"  ng-pattern="/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g"  ng-model="phoneNumber" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlAddress" class="col-sm-6 form-control-label">Address</label>
+                <div class="col-sm-6">
+                    <input name="address" class="form-control" id="formCtrlAddress" placeholder="Brnčičeva 13" type="text" ng-model="address" ng-required="false"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlZipCode" class="col-sm-6 form-control-label">Zip code</label>
+                <div class="col-sm-6">
+                    <input name="zipCode" class="form-control" id="formCtrlZipCode" placeholder="1231" type="text" ng-model="zipCode" ng-required="false"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlDemand" class="col-sm-6 form-control-label">Demand</label>
+                <div class="col-sm-6">
+                    <input name="demand" class="form-control" id="formCtrlDemand" placeholder="Demand" type="text" ng-model="demand" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <input type="submit" class="btn btn-primary col-sm-12" ng-disabled="AngularForm.$invalid" ng-click="formCtrl.submit(email, phoneNumber, address, zipCode, demand )" value="Send demand" />
+            </div>
+        </form>
+        <div ng-show="AngularForm.email.$dirty">
+            <p ng-show="AngularForm.email.$error.required">Email field is required!</p>
+            <p ng-show="AngularForm.email.$error.email">Email is not in the correct format!</p>
+        </div>
+        <div ng-show="AngularForm.phoneNumber.$dirty">
+            <p ng-show="AngularForm.phoneNumber.$error.required">PhoneNumber field is required!</p>
+        </div>
+        <div ng-show="AngularForm.demand.$dirty">
+            <p ng-show="AngularForm.demand.$error.required">Demand field is required!</p>
+        </div>
+
+    </div>
+    <div ng-controller="ConsultancyController as consultCtrl" ng-show="formType == 'Consultancy'" >
+        <h1>{{consultCtrl.title}}</h1>
+        <form name="ConsultForm" class="form-inline" novalidate>
+            <div class="form-group row">
+                <label for="formCtrlEmail" class="col-sm-6 form-control-label">Email</label>
+                <div class="col-sm-6">
+                    <input name="email" class="form-control " placeholder="marko.kozjak@nudge-labs.com" id="ConsultFormEmail" type="email" ng-model="email" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlPhoneNumber" class="col-sm-6 form-control-label">Phone number</label>
+                <div class="col-sm-6">
+                    <input name="phoneNumber" class="form-control" placeholder="+38631311032" id="ConsultFormPhoneNumber" type="text"  ng-pattern="/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g"  ng-model="phoneNumber" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlAddress" class="col-sm-6 form-control-label">Address</label>
+                <div class="col-sm-6">
+                    <input name="address" class="form-control" id="ConsultFormAddress" placeholder="Brnčičeva 13" type="text" ng-model="address" ng-required="false"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlZipCode" class="col-sm-6 form-control-label">Zip code</label>
+                <div class="col-sm-6">
+                    <input name="zipCode" class="form-control" id="ConsultFormZipCode" placeholder="1231" type="text" ng-model="zipCode" ng-minlength="3" ng-required="true" ng-maxlength="6" />
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="formCtrlSalary" class="col-sm-6 form-control-label">Salary per hour</label>
+                <div class="col-sm-6">
+                    <input name="salary" class="form-control" id="formCtrlSalary" placeholder="50" type="text" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="salary" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="form-group row">
+                <label for="formCtrlDemand" class="col-sm-6 form-control-label">Demand</label>
+                <div class="col-sm-6">
+                    <input name="demand" class="form-control" id="ConsultFormDemand" placeholder="Demand" type="text" ng-model="demand" ng-required="true"/>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <input type="submit" class="btn btn-primary col-sm-12" ng-disabled="ConsultForm.$invalid" ng-click="consultCtrl.submit(email, phoneNumber, address, zipCode,salary, demand )" value="Send demand" />
+            </div>
+        </form>
+        <div ng-show="ConsultForm.email.$dirty">
+            <p ng-show="ConsultForm.email.$error.required">Email field is required!</p>
+            <p ng-show="ConsultForm.email.$error.email">Email is not in the correct format!</p>
+        </div>
+        <div ng-show="ConsultForm.phoneNumber.$dirty">
+            <p ng-show="ConsultForm.phoneNumber.$error.required">PhoneNumber field is required!</p>
+            <p ng-show="ConsultForm.phoneNumber.$error.pattern">PhoneNumber patteren is invalid!</p>
+
+        </div>
+        <div ng-show="ConsultForm.demand.$dirty">
+            <p ng-show="ConsultForm.demand.$error.required">Demand field is required!</p>
+        </div>
+        <div ng-show="ConsultForm.salary.$dirty">
+            <p ng-show="ConsultForm.salary.$error.required">Salary field is required!</p>
+            <p ng-show="ConsultForm.salary.$error.pattern">Salary patteren is invalid!</p>
+        </div>
+        <div ng-show="ConsultForm.zipCode.$dirty">
+            <p ng-show="ConsultForm.zipCode.$error.required">Zip code field is required!</p>
+            <p ng-show="ConsultForm.zipCode.$error.minlength">Min length is 3!</p>
+            <p ng-show="ConsultForm.zipCode.$error.maxlength">Max length is 6!</p>
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script src="Freelancer.js"></script>
+</html>

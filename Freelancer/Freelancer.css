@@ -1,0 +1,27 @@
+.ng-hide-add         { animation:0.5s lightSpeedOut ease; }
+.ng-hide-remove      { animation:0.5s lightSpeedIn ease; }
+
+
+/* light speed out */
+@keyframes lightSpeedOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes lightSpeedIn {
+    0% {
+        opacity: 0;
+        transform: translate(100%);
+    }
+
+    100% {
+
+        opacity: 1;
+    }
+}
