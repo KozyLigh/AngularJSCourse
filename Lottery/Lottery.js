@@ -32,11 +32,11 @@ angular.module('app').controller('LotteryController', function($scope, $q, $http
                 $scope.result = 'Drawing number ' + currentNumber;
                 return createLotteryPromise();
             })
-            .then(function(success2){
+            .then(function(success){
                 currentNumber++;
                 $scope.result = 'Drawing number ' + currentNumber;
                 return createLotteryPromise();
-            }, function(error2){
+            }, function(failure){
                 currentNumber++;
                 $scope.result = 'Drawing number ' + currentNumber;
                 return createLotteryPromise();
