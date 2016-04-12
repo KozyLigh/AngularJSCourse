@@ -20,6 +20,8 @@ angular.module('app').controller('LotteryController', function($scope, $q, $http
 
     $scope.drawLotteryNumbers = function()
     {
+        currentNumber=1;
+        $scope.drawnNumbers = [];
         $scope.result = 'Drawing number ' + currentNumber;
         var promise = createLotteryPromise();
 
