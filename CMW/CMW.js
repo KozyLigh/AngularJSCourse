@@ -2,7 +2,7 @@ angular.module('app', []);
 
 angular.module('app').controller('PromiseController', function($scope, $q, $http){
 
-        var carsCtrl={};
+
         function gatherCarsData(){
             $http.get('http://smartninja.betoo.si/api/CMW/cars').then(function(success){
                 $scope.cars = success.data;
