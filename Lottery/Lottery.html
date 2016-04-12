@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bulgarian lottery number draw</title>
+    <script src="angular.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+</head>
+<body ng-app="app">
+
+<div ng-controller="LotteryController">
+    <button ng-click="drawLotteryNumbers()" class="btn btn-primary">Draw lottery numbers</button>
+    <p>{{result}}</p>
+    <p ng-show="drawnNumbers.length>0">First lottery number is:{{numberOne}}, it took {{numberOneDrawTime}}ms to draw this number.</p>
+    <p ng-show="drawnNumbers.length>1">Second lottery number is:{{numberTwo}}, it took {{numberTwoDrawTime}}ms to draw this number.</p>
+    <p ng-show="drawnNumbers.length>2">Third lottery number is:{{numberThree}}, it took {{numberThreeDrawTime}}ms to draw this number.</p>
+</div>
+
+</body>
+<script src="Lottery.js"></script>
+</html>

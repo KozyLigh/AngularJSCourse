@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CMW reservation form</title>
+    <script src="angular.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+</head>
+<body ng-app="app">
+
+<div ng-controller="PromiseController">
+<form name="CarsForm" class="form-inline" novalidate>
+    <div class="form-group row">
+        <label for="carsFormCars" class="col-xs-8 form-control-label">Choose a car</label>
+        <div class="col-xs-4">
+            <select id="carsFormCars" ng-options="car.name + ' ' + car.type for car in cars" ng-model="carsCtrl"  ng-required="true"></select>
+        </div>
+    </div>
+<br/>
+    <div class="form-group row">
+        <label for="carsFormTimetable" class="col-xs-8 form-control-label">Choose a timetable</label>
+        <div class="col-xs-4">
+            <select id="carsFormTimetable" ng-options="timeslot.date + ' ' + timeslot.time disable when timeslot.reserved for timeslot in timeslots | filter:{ carId : carsCtrl.id }" ng-model="timeslot"  ng-required="true"></select>
+        </div>
+    </div>
+    <br/>
+    <div class="form-group row">
+        <label for="CarsFormEmail" class="col-xs-4 form-control-label">Your email</label>
+        <div class="col-xs-8">
+            <input name="email" class="form-control " placeholder="marko.kozjak@nudge-labs.com" id="CarsFormEmail" type="email" ng-model="email" ng-required="true"/>
+        </div>
+    </div>
+    <br/>
+
+    <div class="form-group row">
+        <div class="col-xs-10">
+            <input type="submit" class="btn btn-primary" ng-disabled="CarsForm.$invalid" ng-click="reserveSelected( timeslot.id, email )" value="Reserve car for timeslot" />
+        </div>
+    </div>
+</form>
+
+</div>
+
+</body>
+
+<script src="CMW.js"></script>
+</html>
