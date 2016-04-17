@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fizzbuzz</title>
+    <script src="angular.min.js"></script>
+    <script src="test.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css" >
+    <link rel="stylesheet" href="bootstrap-theme.min.css" >
+    <link rel="stylesheet" href="test.css">
+</head>
+<body ng-app="Fizzbuzz">
+<div ng-controller="FizzbuzzController as fizzbuzzCtrl">
+    <label>Enter number:</label><input type="text" class="form-control" ng-model="fizzbuzzCtrl.number" />
+    <div class="row"><div class="col-xs-6">
+        <h3>Result</h3>
+        <p ng-repeat="result in fizzbuzzCtrl.results track by $index">{{ result }}</p>
+    </div></div>
+</div>
+</body>
+</html>
